@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+
 using namespace std;
 
 void PrintMas(int **a, int n, int m);			//функция вывода массива
