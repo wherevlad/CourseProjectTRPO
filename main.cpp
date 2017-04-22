@@ -6,7 +6,6 @@ using namespace std;
 void PrintMas(int **a, int n, int m);			//функция вывода массива
 
 
-
 int main()
 {
 	srand ( time(NULL) ); 
@@ -23,6 +22,7 @@ int main()
 		-1, -1, -1, -1, -1, -1, -1,  0, -1, -1,
 		-1,  0,  0,  0,  0,  0,  0,  0, -1, -1 
 		};
+
 
     int **a = new int *[n]; // Выделение памяти для массива
     
