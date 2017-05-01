@@ -1,157 +1,38 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 
-#ifndef STACK_H
-#define STACK_H
- 
-#include <cassert> // для assert
-#include <iostream>
- 
-#include <iomanip> // для setw
-
 using namespace std;
- 
-template <typename T>
-class Stack
-{
-private:
-    T *stackPtr;                      // указатель на стек
-    const int size;                   // максимальное количество элементов в стеке
-    int top;                          // номер текущего элемента стека
-public:
-    Stack(int = 10);                  // по умолчанию размер стека равен 10 элементам
-    Stack(const Stack<T> &);          // конструктор копирования
-    ~Stack();                         // деструктор
- 
-    inline void push(const T & );     // поместить элемент в вершину стека
-    inline T pop();                   // удалить элемент из вершины стека и вернуть его
-    inline void printStack();         // вывод стека на экран
-    inline const T &Peek(int ) const; // n-й элемент от вершины стека
-    inline int getStackSize() const;  // получить размер стека
-    inline T *getPtr() const;         // получить указатель на стек
-    inline int getTop() const;        // получить номер текущего элемента в стеке
-};
- 
-// реализация методов шаблона класса STack
- 
-// конструктор Стека
-template <typename T>
-Stack<T>::Stack(int maxSize) :
-    size(maxSize) // инициализация константы
-{
-    stackPtr = new T[size]; // выделить память под стек
-    top = 0; // инициализируем текущий элемент нулем;
-}
- 
-// конструктор копирования
-template <typename T>
-Stack<T>::Stack(const Stack<T> & otherStack) :
-    size(otherStack.getStackSize()) // инициализация константы
-{
-    stackPtr = new T[size]; // выделить память под новый стек
-    top = otherStack.getTop();
- 
-    for(int ix = 0; ix < top; ix++)
-        stackPtr[ix] = otherStack.getPtr()[ix];
-}
- 
-// функция деструктора Стека
-template <typename T>
-Stack<T>::~Stack()
-{
-    delete [] stackPtr; // удаляем стек
-}
- 
-// функция добавления элемента в стек
-template <typename T>
-inline void Stack<T>::push(const T &value)
-{
-    // проверяем размер стека
-    assert(top < size); // номер текущего элемента должен быть меньше размера стека
- 
-    stackPtr[top++] = value; // помещаем элемент в стек
-}
- 
-// функция удаления элемента из стека
-template <typename T>
-inline T Stack<T>::pop()
-{
-    // проверяем размер стека
-    assert(top > 0); // номер текущего элемента должен быть больше 0
- 
-    stackPtr[--top]; // удаляем элемент из стека
-}
- 
-// функция возвращает n-й элемент от вершины стека
-template <class T>
-inline const T &Stack<T>::Peek(int nom) const
-{
-  //
-  assert(nom <= top);
- 
-  return stackPtr[top - nom]; // вернуть n-й элемент стека
-}
- 
-// вывод стека на экран
-template <typename T>
-inline void Stack<T>::printStack()
-{
-    for (int ix = top - 1; ix >= 0; ix--)
-        cout << "|" << setw(4) << stackPtr[ix] << endl;
-}
- 
-// вернуть размер стека
-template <typename T>
-inline int Stack<T>::getStackSize() const
-{
-    return size;
-}
- 
-// вернуть указатель на стек (для конструктора копирования)
-template <typename T>
-inline T *Stack<T>::getPtr() const
-{
-    return stackPtr;
-}
- 
-// вернуть размер стека
-template <typename T>
-inline int Stack<T>::getTop() const
-{
-    return top;
-}
- 
-#endif // STACK_H
+using namespace sf;
 
+#include "stack.h"
 
 void PrintMas(int **a, int n, int m);			//функция вывода массива
 int Maze(int **a, int n, int m);				//генерация начальной матрицы
 int MazeGenerator(int **a, int n, int m, int x, int y);
 void StekPro(int **a, int n, int m, int x, int y);
 
-typedef struct cell{ //структура, хранящая координаты клетки в матрице
-    int x;
-    int y;
-}cell;
-
-typedef struct cellString{ 
-    int x;
-    int y;
-    unsigned int size;
-} cellString;
 
 Stack<int> StackCell(999999999);
 
+int kol = 0;
+int height = 5, width = 5;
 
 int main()
 {
 	srand ( time(NULL) ); 
 	
-    int n, m;
+	RenderWindow window( VideoMode(1000, 600), "Test!");
+    
+    Clock clock;
+
+	RectangleShape rectangle( Vector2f(height, width));
+	
+    int n = 40, m = 40;
     int x = 5, y = 5;
     
-    cin >> n >> m;
+    //cin >> n >> m;
 
 
     int **a = new int *[n]; // Выделение памяти для массива
@@ -168,7 +49,33 @@ int main()
 
 	MazeGenerator(a, n, m, x, y);
 
-   // StekPro(a, n, m, 5, 5);
+    while (window.isOpen()){
+		Event event;
+        while (window.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
+                window.close();
+        }
+
+		//window.clear(Color::Green);
+
+
+		 for (int i=0; i<n; i++)
+			 for (int j=0; j<m ; j++)
+				{ 
+				  if (a[i][j]==1) rectangle.setFillColor(Color(240, 170, 19));
+				  //if (a[i][j]==1) rectangle.setFillColor(Color::Green);
+
+			      if (a[i][j]==-1)  rectangle.setFillColor(Color::Green);
+
+				  //if (a[i][j]==' ') continue;
+
+		          rectangle.setPosition(j*height, i*width) ; 
+		          window.draw(rectangle);
+	       	 }
+    
+        window.display();
+    }
     
     PrintMas(a, n, m);
     
@@ -266,7 +173,6 @@ int MazeGenerator(int **a, int n, int m, int x, int y){
 			}
 			case 2:{
 				side = rand() % 2 + 1;
-				cout << "    " << side << endl;
 				for(int i = 0; i < 4; i++){
 					if(b[i] == 1) side--;
 					if(side == 0){ i++; side = i; break;}
@@ -275,7 +181,6 @@ int MazeGenerator(int **a, int n, int m, int x, int y){
 			}
 			case 3:{
 				side = rand() % 3 + 1;
-				cout << "    " << side << endl;
 				for(int i = 0; i < 4; i++){
 					if(b[i] == 1) side--;
 					if(side == 0){ i++; side = i; break;}
@@ -293,7 +198,6 @@ int MazeGenerator(int **a, int n, int m, int x, int y){
 		}
 	}
 
-	cout << NeighborsAmount << "    " << side << endl;
 	switch (side){
 		case 1:{
 			if(x-2 > 0){
