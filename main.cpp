@@ -143,6 +143,7 @@ typedef struct cellString{
 
 Stack<int> StackCell(999999999);
 
+
 int main()
 {
 	srand ( time(NULL) ); 
@@ -151,6 +152,7 @@ int main()
     int x = 5, y = 5;
     
     cin >> n >> m;
+
 
     int **a = new int *[n]; // Выделение памяти для массива
 
