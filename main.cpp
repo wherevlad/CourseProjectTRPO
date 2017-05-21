@@ -6,15 +6,15 @@ using namespace std;
 const int n=10;
 const int m=10;
 int mas_test[n][m];
-int d;
 
 void PrintMas(int **a, int n, int m);			
-void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final);		//ôóíêöèÿ íàõîæäåíèå êðàò÷àéøåãî ïóòè
-void way(int **a,int n,int m);
+void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final);		
+int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final);
+
 int main()
 {
 	srand ( time(NULL) ); 
-    int n = 10, m = 10; 						
+    int n = 10, m = 10; 					
     int mas_test[10][10] = {					
 		-1,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 		-1,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -28,9 +28,8 @@ int main()
 		-1,  0,  0,  0,  0,  0,  0,  0, -1, -1 
 		};
 		
-
-
-    int **a = new int *[n]; �
+		
+    int **a = new int *[n]; 
     
     for (int i=0; i<n; i++)
          a[i] = new int [m];
@@ -43,11 +42,19 @@ int main()
     }
     
     PrintMas(a, n, m);
-    cout << endl;
- 
     
-	track(a, n, m, 1, 2, 5, 3);
-    way(a,n,m);
+	track(a, n, m, 0, 0, 5, 3);
+	
+	cout << endl;
+	
+	PrintMas(a, n, m);
+	
+	a[0][0] = -2;
+	
+	
+	way(a, n, m, 0, 0, 5, 3);
+	
+	cout << endl;
 	
 	PrintMas(a, n, m);
 	
@@ -56,11 +63,34 @@ int main()
     return 0;
 }
 
+int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
+	int d = a[x_Final][y_Final];
+
+	a[x_Final][y_Final] = -2;
+
+				
+	if((x_Final+1 < n) && (a[x_Final+1][y_Final] == d - 1))
+			way(a, n, m, x_Primary, y_Primary, x_Final+1, y_Final);
+			
+	else if((x_Final-1 >= 0) && (a[x_Final-1][y_Final] == d - 1))
+			way(a, n, m, x_Primary, y_Primary, x_Final-1, y_Final);
+		
+	else if((y_Final-1 >= 0) && (a[x_Final][y_Final-1] == d - 1))
+			way(a, n, m, x_Primary, y_Primary, x_Final, y_Final-1);
+		
+	else if((y_Final+1 < m) && (a[x_Final][y_Final+1] == d - 1))
+			way(a, n, m, x_Primary, y_Primary, x_Final, y_Final+1);
+	return 0;
+}
+
+
+
 
 void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
 	int d = 1, x = x_Primary, y = y_Primary; 
 	int i, j; 
 	a[x][y] = d; 
+
 	d++; 
 
 	for(;;){
@@ -104,62 +134,11 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 					}
 				}
 				
-	
-				
 			} 
 		}
-		if(a[x_Final][y_Final] > 0)	break;  
+		if(a[x_Final][y_Final] > 0)	break; 
 	}
-	
 }
-
-
-
-void way(int **a,int n,int m){
-int i, j;
-int d;
-int x_Primary, y_Primary;
-int x_Final, y_Final;
-a[x_Final][y_Final]=d; 
-	for(;;){
-	         for(i=d-2;i>-2,i<n-2;i--){
-		      for(j=d-2;j>-2,j<m-2;j--){
-		      	for(;d>-3;d--){
-		      	if(a[i][j] == -3) continue;
-		if(a[i][j]>-2){
-					      	 	    a[x_Final][y_Final]=-5;
- 	    if(i+1 < n){
- 	    	if(a[x_Final+1][y_Final] < d) 
-			 a[x_Final+1][y_Final] = -5;
- 	    }
- 	    if(i-1 >=n){
- 	                           if(a[x_Final-1][y_Final] < d) 
-								a[x_Final-1][y_Final] = -5 ;
- 	                            
- 	                       }
- 	             if(j-1 >=m){  
-	                           if(a[x_Final][y_Final-1] < d) 
-							   a[x_Final][y_Final-1] = -5;
-	                          
-	                       }
-	         if(j+1 < m)   {
-			          
-	                           if(a[x_Final][y_Final+1] < d) 
-							   a[x_Final][y_Final+1] = -5;
-	                       }
- 	      
-			
-	                 }
-		          }    	
-			  }
-      }
-	
-	 
-	if(a[x_Primary][y_Primary]== -2) break;
-
-}
-}
-
 
 
 
@@ -168,7 +147,9 @@ void PrintMas(int **a, int n, int m){
     for (int i=0; i<n; i++){
          for (int j=0; j<m; j++){
             if(a[i][j] == -1) cout << "||";
-            else if(a[i][j] > 0) cout << a[i][j] << " ";
+            else if(a[i][j] > 0 && a[i][j] < 10) cout << a[i][j] << " ";
+            else if(a[i][j] >= 10) cout << a[i][j];
+            else if(a[i][j] == -2) cout << "+ ";
             else cout << "__";
          }
          cout << endl;
