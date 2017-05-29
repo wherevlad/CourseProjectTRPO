@@ -1,5 +1,5 @@
 #!/bin/bash
 
-g++ -c main.cpp
+g++ -c main.cpp -g -O0 -ltcmalloc
 g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 ./sfml-app
