@@ -6,7 +6,7 @@ all: hello test
 
 
 hello: build/src/main.o
-	g++ build/src/main.o -o bin/sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+	g++ build/src/main.o -o bin/sfml-app
 	./bin/sfml-app
 
 test: $(MTO) $(DTO) $(VTO)

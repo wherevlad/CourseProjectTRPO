@@ -11,11 +11,6 @@ int main()
 {
 	srand ( time(NULL) );
 	
-	RenderWindow window( VideoMode(height * 20, width * 20), "Test!");
-    
-    Clock clock;
-
-	RectangleShape rectangle( Vector2f(height, width));
 	
     int n = N, m = M;
     int x = 5, y = 5;
@@ -55,37 +50,7 @@ int main()
 	way(a, n, m, 1, 1, n-2, m-2);
 	//cout << "+\n";
 
-    while (window.isOpen()){
-		Event event;
-        while (window.pollEvent(event))
-        {
-            if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
-                window.close();
-        }
-
-		//window.clear(Color::Green);
-
-
-		 for (int i=0; i<n; i++)
-			 for (int j=0; j<m ; j++)
-				{ 
-				  if (a[i][j] > 0) rectangle.setFillColor(Color(240, 170, 19));
-				  //if (a[i][j]==1) rectangle.setFillColor(Color::Green);
-
-			      if (a[i][j]==-1)  rectangle.setFillColor(Color::Black);
-			      
-			      if (a[i][j]==-2)  rectangle.setFillColor(Color::Red);
-			      
-			      if (a[i][j]==0)  rectangle.setFillColor(Color::Blue);
-
-				  //if (a[i][j]==' ') continue;
-
-		          rectangle.setPosition(j*height, i*width) ; 
-		          window.draw(rectangle);
-	       	 }
-    
-        window.display();
-    }
+    PrintMas(a, n, m);
     
     StackCell.printStack();
     
