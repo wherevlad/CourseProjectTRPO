@@ -1,4 +1,6 @@
 language: c++
 compiler: g++
-install: make
-script: ./bin/deposit-calc_test
+
+script:
+- make
+- bin/deposit-calc_test
