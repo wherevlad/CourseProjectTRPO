@@ -532,10 +532,10 @@ int ctest_main(int argc, const char *argv[])
 #endif
 
 					if (test->setup) test->setup(test->data);
-					if (test->data)
+					/*if (test->data)
 						test->run(test->data);
 					else
-						test->run();
+						test->run();*/
 					if (test->teardown) test->teardown(test->data);
 					// if we got here it's ok
 #ifdef CTEST_COLOR_OK
