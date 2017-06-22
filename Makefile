@@ -4,7 +4,6 @@ VTO = ./build/test/validation_test.o
 
 all: hello test
 
-
 hello: build/src/main.o
 	g++ build/src/main.o -o bin/sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 	./bin/sfml-app
