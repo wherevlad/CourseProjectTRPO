@@ -1,3 +1,3 @@
 /build/*.o
-/bin/
-!/bin/med.sh
+/bin/sfml-app
+/bin/deposit-calc_test
