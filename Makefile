@@ -7,16 +7,20 @@ all: hello test
 	./bin/deposit-calc_test
 
 hello: build/src/main.o
+	mkdir -p bin
 	g++ build/src/main.o -o bin/sfml-app
 
 test: $(MTO) $(DTO) $(VTO)
+	mkdir -p bin
 	g++ $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test
 
 
 build/src/main.o: src/main.cpp
+	mkdir -p build/src
 	g++ -c src/main.cpp -o build/src/main.o
 
 $(MTO): ./test/main.cpp
+	mkdir -p build/test
 	g++ -c ./test/main.cpp -o $(MTO)
 
 $(DTO): ./test/deposit_test.cpp
