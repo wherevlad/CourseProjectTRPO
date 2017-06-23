@@ -1,4 +1,1 @@
-/build/src/*.o
-/build/test/*.o
-/bin/deposit-calc_test
-/bin/sfml-app
+
