@@ -1,6 +1,6 @@
-MTO = ./build/test/main_test.o
-DTO = ./build/test/deposit_test.o
-VTO = ./build/test/validation_test.o
+MTO = build/test/main_test.o
+DTO = build/test/deposit_test.o
+VTO = build/test/validation_test.o
 
 all: hello test
 	./bin/sfml-app
@@ -19,17 +19,17 @@ build/src/main.o: src/main.cpp
 	mkdir -p build/src
 	g++ -c src/main.cpp -o build/src/main.o
 
-$(MTO): ./test/main.cpp
+$(MTO): test/main.cpp
 	mkdir -p build/test
-	g++ -c ./test/main.cpp -o $(MTO)
+	g++ -c test/main.cpp -o $(MTO)
 
-$(DTO): ./test/deposit_test.cpp
+$(DTO): test/deposit_test.cpp
 	mkdir -p build/test
-	g++ -c ./test/deposit_test.cpp -o $(DTO)
+	g++ -c test/deposit_test.cpp -o $(DTO)
 
-$(VTO): ./test/validation_test.cpp
+$(VTO): test/validation_test.cpp
 	mkdir -p build/test
-	g++ -c ./test/validation_test.cpp -o $(VTO)
+	g++ -c test/validation_test.cpp -o $(VTO)
 
 
 clean:
