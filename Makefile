@@ -12,7 +12,7 @@ hello: build/src/main.o
 
 test: $(MTO) $(DTO) $(VTO)
 	mkdir -p bin
-	g++ $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test
+	g++ $(MTO) $(DTO) $(VTO) -o bin/deposit-calc_test
 
 
 build/src/main.o: src/main.cpp
