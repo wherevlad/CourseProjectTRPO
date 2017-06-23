@@ -1,50 +1,5 @@
-#include "deposit.h"
-
-int main()
-{
-	srand ( time(NULL) );
-	
-	
-    int n = N, m = M;
-    int x = 5, y = 5;
-    
-    //cin >> n >> m;
-
-
-    int **a = new int *[n]; // Выделение памяти для массива
-    
-    for (int i=0; i<n; i++)
-         a[i] = new int [m];
-     
-    
-    Maze(a, n, m);
-
-
-    a[n-2][m-2] = 0;
-    a[n-2][m-3] = 0;
-	MazeGenerator(a, n, m, x, y);
-	for(;;){
-		if(StackCell.getTop() > 0){
-			MazeSteck(a, n, m);
-		}
-		else break;
-	}
-	
-
-	track(a, n, m, 1, 1, n-2, m-2);
-	
-
-	a[1][1] = -2;
-	way(a, n, m, 1, 1, n-2, m-2);
-
-
-    PrintMas(a, n, m);
-    
-    StackCell.printStack();
-    
-    delete [] a; 
-    return 0;
-}
+#ifndef FUNCTIO_H
+#define FUNCTIO_H
 
 int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
 	int d = a[x_Final][y_Final];
@@ -314,3 +269,5 @@ void PrintMas(int **a, int n, int m){			//функция вывода масси
     }
     cout << endl;
 }
+
+#endif
