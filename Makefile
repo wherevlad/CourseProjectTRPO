@@ -14,7 +14,7 @@ test: $(MTO) $(DTO) $(VTO)
 
 
 build/src/main.o: src/main.cpp
-	g++ -c src/main.cpp -g -O0 -ltcmalloc -o build/src/main.o
+	g++ -c src/main.cpp -o build/src/main.o
 
 $(MTO): ./test/main.cpp
 	g++ -c ./test/main.cpp -o $(MTO)
