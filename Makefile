@@ -24,9 +24,11 @@ $(MTO): ./test/main.cpp
 	g++ -c ./test/main.cpp -o $(MTO)
 
 $(DTO): ./test/deposit_test.cpp
+	mkdir -p build/test
 	g++ -c ./test/deposit_test.cpp -o $(DTO)
 
 $(VTO): ./test/validation_test.cpp
+	mkdir -p build/test
 	g++ -c ./test/validation_test.cpp -o $(VTO)
 
 
