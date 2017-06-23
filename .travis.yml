@@ -1,6 +1,15 @@
 language: c++
 compiler: g++
 
-script:
+install:
 - make
+- make test
+
+script:
 - bin/deposit-calc_test
+
+after_success:
+- make clean
+
+after_failure:
+- make clean
