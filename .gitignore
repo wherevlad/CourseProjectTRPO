@@ -1,1 +1,3 @@
 /build/*.o
+/bin/
+!/bin/med.sh

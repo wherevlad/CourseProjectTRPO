@@ -3,15 +3,14 @@ DTO = ./build/test/deposit_test.o
 VTO = ./build/test/validation_test.o
 
 all: hello test
-
+	./bin/sfml-app
+	./bin/deposit-calc_test
 
 hello: build/src/main.o
 	g++ build/src/main.o -o bin/sfml-app
-	./bin/sfml-app
 
 test: $(MTO) $(DTO) $(VTO)
 	g++ $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test
-	./bin/deposit-calc_test
 
 
 build/src/main.o: src/main.cpp
@@ -30,3 +29,5 @@ $(VTO): ./test/validation_test.cpp
 clean:
 	rm ./build/src/*.o
 	rm ./build/test/*.o
+	rm ./bin/deposit-calc_test
+	rm ./bin/sfml-app

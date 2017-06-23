@@ -1,7 +1,7 @@
 #include "deposit.h"
 
 
-Stack<int> StackCell(999999999);
+Stack<int> StackCell(999999);
 
 float height = 20, width = 20;
 
