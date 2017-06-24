@@ -16,7 +16,5 @@ int matrix_1(int n, int m){
 		}
 	}
 	return sum;
-	/*int sum = n+m;
-	return sum;*/
 }
 //matrix
