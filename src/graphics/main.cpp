@@ -1,16 +1,60 @@
-#ifndef FUNCTIO_H
-#define FUNCTIO_H
+#include "deposit.h"
 
-void MatrixFilling (std::ofstream &fout, int **a, int n, int m){
-
-	//fout << n << " " << m << endl;
-
-	for (int i=0; i<n; i++){
-		for (int j=0; j<m; j++){
-			fout << a[i][j] << ", ";
-		}
-		fout << endl;
+int main()
+{
+	srand ( time(NULL) );
+	
+	
+    int n = N, m = M;
+    int x = 5, y = 5;
+    
+    cout << "Введите длину и ширину матрицы(меньше 20х20 и больше 8x8):";
+    
+    for(;;){
+		//cin >> n >> m;
+		n = 10;
+		m = 10;
+		
+		if(n > 20 || m > 20 || n < 8 || m < 8)
+			cout << "Введите допустимые значения размера матрицы..";
+		else
+			break;
 	}
+
+
+    int **a = new int *[n]; // Выделение памяти для массива
+    
+    for (int i=0; i<n; i++)
+         a[i] = new int [m];
+     
+    
+    Maze(a, n, m);
+
+
+    a[n-2][m-2] = 0;
+    a[n-2][m-3] = 0;
+	MazeGenerator(a, n, m, x, y);
+	for(;;){
+		if(StackCell.getTop() > 0){
+			MazeSteck(a, n, m);
+		}
+		else break;
+	}
+	
+
+	track(a, n, m, 1, 1, n-2, m-2);
+	
+
+	a[1][1] = -2;
+	way(a, n, m, 1, 1, n-2, m-2);
+
+
+    PrintMas(a, n, m);
+    
+    StackCell.printStack();
+    
+    delete [] a; 
+    return 0;
 }
 
 int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
@@ -41,7 +85,8 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 	int i, j; 
 	a[x][y] = d; 
 	
-	d++;
+	d++; 
+	int kk = 1;
 	for(;;){
 		for(i = 0; i < n; i++){
 			for(j = 0; j < m; j++){
@@ -85,6 +130,8 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 				if(d == 1) break;
 			}
 			if(d == 1) break;
+		}
+		if(a[kk][kk] > 0 || a[kk][kk] == -1){ cout << kk << endl; kk ++;
 		}
 		if(a[x_Final][y_Final] > 0)	break; 
 	}
@@ -278,5 +325,3 @@ void PrintMas(int **a, int n, int m){			//функция вывода масси
     }
     cout << endl;
 }
-
-#endif

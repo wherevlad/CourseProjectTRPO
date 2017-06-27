@@ -1,18 +1,6 @@
 #ifndef FUNCTIO_H
 #define FUNCTIO_H
 
-void MatrixFilling (std::ofstream &fout, int **a, int n, int m){
-
-	//fout << n << " " << m << endl;
-
-	for (int i=0; i<n; i++){
-		for (int j=0; j<m; j++){
-			fout << a[i][j] << ", ";
-		}
-		fout << endl;
-	}
-}
-
 int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
 	int d = a[x_Final][y_Final];
 
@@ -41,7 +29,8 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 	int i, j; 
 	a[x][y] = d; 
 	
-	d++;
+	d++; 
+	int kk = 1;
 	for(;;){
 		for(i = 0; i < n; i++){
 			for(j = 0; j < m; j++){
@@ -85,6 +74,8 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 				if(d == 1) break;
 			}
 			if(d == 1) break;
+		}
+		if(a[kk][kk] > 0 || a[kk][kk] == -1){ cout << kk << endl; kk ++;
 		}
 		if(a[x_Final][y_Final] > 0)	break; 
 	}

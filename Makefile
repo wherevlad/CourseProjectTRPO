@@ -11,25 +11,22 @@ hello: build/src/main.o
 	g++ build/src/main.o -o bin/sfml-app
 
 test: $(MTO) $(DTO) $(VTO)
-	mkdir -p bin
-	g++ $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test
+	gcc $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test -lm
 
 
 build/src/main.o: src/main.cpp
 	mkdir -p build/src
 	g++ -c src/main.cpp -o build/src/main.o
 
-$(MTO): ./test/main.cpp
+$(MTO): ./test/main.c
 	mkdir -p build/test
-	g++ -c ./test/main.cpp -o $(MTO)
+	gcc -Wall -c test/main.c -o $(MTO)
 
-$(DTO): ./test/deposit_test.cpp
-	mkdir -p build/test
-	g++ -c ./test/deposit_test.cpp -o $(DTO)
+$(DTO): ./test/deposit_test.c
+	gcc -Wall -c test/deposit_test.c -o $(DTO)
 
-$(VTO): ./test/validation_test.cpp
-	mkdir -p build/test
-	g++ -c ./test/validation_test.cpp -o $(VTO)
+$(VTO): ./test/validation_test.c
+	gcc -Wall -c test/validation_test.c -o $(VTO)
 
 
 clean:

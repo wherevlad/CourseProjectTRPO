@@ -23,6 +23,6 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final);
 void MazeSteck(int **a, int n, int m);
 
-void MatrixFilling (std::ofstream &fout, int **a, int n, int m);
+void matrix_1 (std::ofstream &fout, int **a, int n, int m);
 
 #endif
