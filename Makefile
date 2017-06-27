@@ -1,23 +1,22 @@
 MTO = ./build/test/main_test.o
 DTO = ./build/test/deposit_test.o
-VTO = ./build/test/validation_test.o
 
 all: test hello
 
 
 hello: build/src/main.o
 	mkdir -p bin
-	g++ build/src/main.o -o bin/sfml-app
-	./bin/sfml-app
+	gcc build/src/main.o -o bin/app
+	./bin/app
 
-test: $(MTO) $(DTO) $(VTO)
-	gcc $(MTO) $(DTO) $(VTO) -o ./bin/deposit-calc_test -lm
+test: $(MTO) $(DTO) 
+	gcc $(MTO) $(DTO) -o ./bin/deposit-calc_test -lm
 	./bin/deposit-calc_test
 
 
-build/src/main.o: src/main.cpp
+build/src/main.o: src/main.c
 	mkdir -p build/src
-	g++ -c src/main.cpp -o build/src/main.o
+	gcc -c src/main.c -o build/src/main.o
 
 $(MTO): ./test/main.c
 	mkdir -p build/test
@@ -26,12 +25,10 @@ $(MTO): ./test/main.c
 $(DTO): ./test/deposit_test.c
 	gcc -Wall -c test/deposit_test.c -o $(DTO)
 
-$(VTO): ./test/validation_test.c
-	gcc -Wall -c test/validation_test.c -o $(VTO)
 
 
 clean:
-	rm ./build/src/*.o
-	rm ./build/test/*.o
-	rm ./bin/deposit-calc_test
-	rm ./bin/sfml-app
+	rm -f ./build/src/*.o
+	rm -f ./build/test/*.o
+	rm -f ./bin/deposit-calc_test
+	rm -f ./bin/app

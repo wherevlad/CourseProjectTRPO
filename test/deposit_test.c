@@ -1,6 +1,6 @@
 #include "../thirdparty/ctest.h"
-#include "../src/ftest/deposit.c"
-#include "../src/ftest/deposit.h"
+#include "../src/deposit.c"
+#include "../src/deposit.h"
 
 
 CTEST(matrix_1, matrix_1_test)

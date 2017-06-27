@@ -1,5 +1,5 @@
-#include "deposit.h"
-
+#ifndef FUNCTIO_H
+#define FUNCTIO_H
 
 void matrix_1(int **a, int n, int m){
 	int i, j;
@@ -30,12 +30,6 @@ void matrix_1(int **a, int n, int m){
 }
 
 
-
-
-
-
-
-
 int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_Final){ 
 	int d = a[x_Final][y_Final];
 
@@ -53,7 +47,6 @@ int way(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int y_
 		
 	else if((y_Final+1 < m) && (a[x_Final][y_Final+1] == d - 1))
 			way(a, n, m, x_Primary, y_Primary, x_Final, y_Final+1);
-	else return 0;
 	return 0;
 }
 
@@ -113,3 +106,23 @@ void track(int **a, int n, int m, int x_Primary, int y_Primary, int x_Final, int
 		if(a[x_Final][y_Final] > 0)	break; 
 	}
 }
+
+
+void PrintMas(int **a, int n, int m){			//функция вывода массива
+	int i, j;
+	printf("\n");
+    for (i=0; i<n; i++){
+         for (j=0; j<m; j++){
+            if(a[i][j] == -1) printf("||");
+            else if(a[i][j] >= 0 && a[i][j] < 10){ printf("%d", a[i][j]); printf(" ");}
+            else if(a[i][j] >= 10) printf("%d", a[i][j]);
+            else if(a[i][j] == -2) printf("+ ");
+            else printf("%d", a[i][j]);
+         }
+         printf("\n");
+    }
+    printf("\n");
+}
+
+
+#endif
