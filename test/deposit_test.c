@@ -5,7 +5,7 @@
 
 CTEST(matrix_1, matrix_1_test)
 {
-    int n = 10, m = 10, i, j;
+    int n = 10, m = 10, i;
     int **a = (int**)malloc(n * sizeof(int*));
     
     for (i=0; i<n; i++)
@@ -24,16 +24,17 @@ CTEST(matrix_1, matrix_1_test)
 
 CTEST(matrix_2, matrix_2_test)
 {
-    int n = 10, m = 10, i, j;
+    int n = 10, m = 10, i;
     int **a = (int**)malloc(n * sizeof(int*));
     
     for (i=0; i<n; i++)
          a[i] = (int*)malloc(m * sizeof(int));
 
     matrix_2(a, n, m);
+    
 
-    ASSERT_EQUAL(a[1][1], -2);
-    ASSERT_EQUAL(a[n-2][m-2], -2);
+    ASSERT_EQUAL(a[1][1], -1);
+    ASSERT_EQUAL(a[n-2][m-2], -1);
 
     for(i=0; i<n; i++)
         free(a[i]);
