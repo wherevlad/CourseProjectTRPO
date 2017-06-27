@@ -1,22 +1,28 @@
 MTO = ./build/test/main_test.o
 DTO = ./build/test/deposit_test.o
+DO = ./build/src/deposit.o
+MO = ./build/src/main.o
 
-all: test hello
+all: hello test
 
 
-hello: build/src/main.o
+hello: $(MO) $(DO)
 	mkdir -p bin
-	gcc build/src/main.o -o bin/app
+	gcc $(MO) $(DO) -o bin/app -lm
 	./bin/app
 
+
 test: $(MTO) $(DTO) 
-	gcc $(MTO) $(DTO) -o ./bin/deposit-calc_test -lm
+	gcc $(MTO) $(DTO) $(DO) -o ./bin/deposit-calc_test -lm
 	./bin/deposit-calc_test
-
-
-build/src/main.o: src/main.c
+	
+$(MO): src/main.c 
 	mkdir -p build/src
 	gcc -c src/main.c -o build/src/main.o
+
+$(DO): src/deposit.c
+	mkdir -p build/src
+	gcc -c src/deposit.c -o build/src/deposit.o
 
 $(MTO): ./test/main.c
 	mkdir -p build/test

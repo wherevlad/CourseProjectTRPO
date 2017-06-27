@@ -1,5 +1,4 @@
 #include "../thirdparty/ctest.h"
-#include "../src/deposit.c"
 #include "../src/deposit.h"
 
 

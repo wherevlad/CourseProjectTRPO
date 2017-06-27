@@ -1,5 +1,4 @@
 #include "deposit.h"
-#include "deposit.c"
 
 int main()
 {
